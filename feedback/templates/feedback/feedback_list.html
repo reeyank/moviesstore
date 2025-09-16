@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Customer Feedback</h1>
+    {% if feedbacks %}
+        <div class="list-group my-4">
+            {% for feedback in feedbacks %}
+                <div class="list-group-item">
+                    <h4 class="list-group-item-heading">{{ feedback.name|default:"Anonymous" }}</h4>
+                    <p class="list-group-item-text">{{ feedback.comment }}</p>
+                    <small class="text-muted">{{ feedback.created_at }}</small>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No feedback has been submitted yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -11,4 +11,15 @@
     </div>
   </div>
 </div>
+
+{% include 'feedback/feedback_form.html' with form=template_data.feedback_form %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var modal = document.getElementById('feedback-modal');
+        if (modal) {
+            modal.style.display = 'block';
+        }
+    });
+</script>
 {% endblock content %}

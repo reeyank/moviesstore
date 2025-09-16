@@ -1,0 +1,95 @@
+<div id="feedback-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2>We'd love your feedback!</h2>
+        <p>How was your checkout experience?</p>
+        <form method="post" action="{% url 'feedback_submit' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="id_name" class="form-label">Name:</label>
+                {{ form.name }}
+            </div>
+            <div class="mb-3">
+                <label for="id_comment" class="form-label">Comment:</label>
+                {{ form.comment }}
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Feedback</button>
+            <button type="button" class="btn btn-secondary close-button">Cancel</button>
+        </form>
+    </div>
+</div>
+
+<style>
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto; /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%; /* Could be more or less, depending on screen size */
+        position: relative;
+    }
+
+    /* The Close Button */
+    .close-button {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close-button:hover,
+    .close-button:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var modal = document.getElementById('feedback-modal');
+        var closeButtons = document.querySelectorAll('.close-button');
+
+        // Function to open the modal
+        function openModal() {
+            modal.style.display = 'block';
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        // Attach click event to close buttons
+        closeButtons.forEach(function(btn) {
+            btn.addEventListener('click', closeModal);
+        });
+
+        // Close the modal if the user clicks anywhere outside of it
+        window.addEventListener('click', function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        });
+
+        // Example: How to open the modal after checkout. This part will be integrated into the purchase success page.
+        // For now, let's assume it opens immediately for testing.
+        // Note: The openModal() call here is for testing the modal in isolation. 
+        // When this file is included in purchase.html, the modal will be opened by the script in purchase.html.
+        // openModal(); 
+    });
+</script>
